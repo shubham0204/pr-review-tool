@@ -16,9 +16,14 @@ load_dotenv()
 owner = input("Enter the owner of the repository: ")
 repo = input("Enter the repository name: ")
 pr_number = int(input("Enter the PR number: "))
+llm = input("Enter the LLM model name: ")
+if llm == "openai":
+    model = llm_gemini()
+else:
+    model = llm_openai()
 
 parser = JsonOutputParser(pydantic_object=List[Suggestion])
-analyze_chain = file_review_template | llm_gemini() | parser
+analyze_chain = file_review_template | model | parser
 refactor_chain = file_refactor_template | llm_gemini()
 
 
