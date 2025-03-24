@@ -8,16 +8,14 @@ from chat_template import file_refactor_template, file_review_template
 import pickle
 from dotenv import load_dotenv
 from langchain_core.output_parsers import JsonOutputParser
-from utils import graph_to_png
 
 # load environment variables from the .env file
 # present in the root directory
 load_dotenv()
 
-owner = "shubham0204"
-repo = "SmolChat-Android"
-pr_number = 56
-
+owner = input("Enter the owner of the repository: ")
+repo = input("Enter the repository name: ")
+pr_number = int(input("Enter the PR number: "))
 
 parser = JsonOutputParser(pydantic_object=List[Suggestion])
 analyze_chain = file_review_template | llm_gemini() | parser
@@ -154,7 +152,6 @@ def build_workflow():
 
 
 workflow = build_workflow()
-print(workflow.get_graph().draw_mermaid())
 
 state = {
     "pr": None,
