@@ -1,0 +1,12 @@
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.venv
+.env
+.pytest_cache
+.ruff_cache
+.DS_Store
+*.obj
